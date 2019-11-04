@@ -23,28 +23,23 @@ public:
   class Board{
   public:
 
-    void print();
-    void printReport();
+    void print()const;
+    void printReport()const;
     void readFromfile(string name);
-    void writeToFile(string name);
+    void writeToFile(string name)const;
     void reset();
     void setsize();
     void move();
-    bool isSolved();
+    bool isSolved()const;
     bool isDirectionValid();
     void FindCoord();
     void setboard();
-    void setwidth(int w){
-      w = width;
-    }
-    void setheight(int h){
-      h = height;
-    }
-    void setCoordinates(int x,int y){
-      coord_x = x;
-      coord_y = y;
-    }
+
+    void setwidth(int w){w = width;}
+    void setheight(int h){h = height;}
+    void setCoordinates(int x,int y){coord_x = x,coord_y = y;}
     void setMove(char m)    {Move = m;}
+
     char getmove()          {return Move;}
     int  getwidth()         {return width;}
     int  getheight()        {return height;}
@@ -75,7 +70,6 @@ void NPuzzle::menu(int argc, char const *argv[])
         setsize();
         obj.setboard();
         shuffle();
-        obj.FindCoord();
         print();
   }
   else if (argc == 2) {
@@ -171,10 +165,9 @@ void NPuzzle::solvePuzzle(){
 }
 void NPuzzle::Board::setboard(){
   int k = 1;
-  int r = rand()%(height*width) + 1;
   for (int i = 0; i < height; i++) {
     for (int j = 0; j < width; j++) {
-      if (k == r) {
+      if (k == height*width) {
         area[i][j] = -1;
         k++;
       }
@@ -183,8 +176,9 @@ void NPuzzle::Board::setboard(){
       }
     }
   }
+  setCoordinates(width-1,height-1);
 }
-bool NPuzzle::Board::isSolved(){
+bool NPuzzle::Board::isSolved()const{
   int goal[9][9];
   int k = 1;
   int count = 0;
@@ -201,10 +195,11 @@ bool NPuzzle::Board::isSolved(){
   for (int i = 0; i < height; i++) {
      for (int j = 0; j < width; j++) {
         if (goal[i][j] == area[i][j])   {
-          count ++;
+          cout << count ++ << endl;
         }
       }
     }
+  //cout << "count : " << count << endl;
   if (count == width*height) {
     return true;
   }
@@ -220,10 +215,12 @@ void NPuzzle::Board::setsize(){
     cin >> w1;
   }
   while(h1 < 3 || h1 > 9 || w1 < 3 || w1 > 9);
+  //obj.setwidth(w1);
+  //obj.setheight(w1);
     height = h1;
     width  = w1;
 }
-void NPuzzle::Board::print(){
+void NPuzzle::Board::print()const{
   for (int i = 0; i < width; ++i)
   {
     cout << "----";
@@ -312,7 +309,7 @@ void NPuzzle::Board::move()
       break;
   }
 }
-void NPuzzle::Board ::writeToFile(string savefile)
+void NPuzzle::Board ::writeToFile(string savefile)const
 {
   int temp[81];
   ofstream sboard;
@@ -391,7 +388,7 @@ void NPuzzle::Board::FindCoord(){
 void NPuzzle::shuffle(){
   int index;
   const char moving[4] = {'w','s','a','d'};
-  	for (int i = 0; i < 6*6; ++i){
+  	for (int i = 0; i < obj.getwidth()*obj.getheight(); ++i){
       do {
         index = rand()%4;
         obj.setMove(moving[index]);
@@ -585,6 +582,7 @@ if (obj.isDirectionValid()){
       return 'a';
     break;
   }
+  return 'a';
 }
 void NPuzzle::print(){
   obj.print();
