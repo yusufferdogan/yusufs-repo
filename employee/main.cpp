@@ -10,35 +10,30 @@ int main(int argc, char const *argv[])
   VectorOfEmployees.push_back(e1);
   VectorOfEmployees.push_back(e2);
   Employee sum = e1 + e2 ;
-  VectorOfEmployees.push_back(sum);
-  cout << e1;
+  e3 = sum;
+  VectorOfEmployees.push_back(e3);
+  for (size_t i = 0; i < VectorOfEmployees.size(); i++)
+    cout << "Employee" << i << ": " <<VectorOfEmployees[i];
+  cout << "---------------------------------------------------------------------\n";
   e1++;
-  cout << e1;
-  ++e1;
-  cout << e1;
+  e2++;
+  e3++;
+  Employee e4 = e1-e2;
+  VectorOfEmployees.push_back(e4);
+  for (size_t i = 0; i < VectorOfEmployees.size(); i++)
+      cout << "Employee" << i << ": " <<VectorOfEmployees[i];
+  cout << "---------------------------------------------------------------------\n";
+  if (e1 == e3)
+    cout << " 2 employees are equal\n";
+  else
+    cout << "2 employees are not same\n";
+  cout << e1 (0,0) << endl;
   return 0;
 }
-//cout << e2++;
-//  e1 ()++;
-//  e2 ()++;
-//cout << e1;
-//cout << e2;
-//e3 = e1;
-//cout << e3;
-/*  for (size_t i = 0; i < VectorOfEmployees.size(); i++) {
-  cout << VectorOfEmployees[i];
-}*/
-//  VectorOfEmployees.resize(1);
   //cout << "sizeof vector is : " << VectorOfEmployees.size() << endl;
- /*  if (e1 == e2) {
-    cout << " 2 employees are equal\n";
-  }
-  else {
-    cout << "not same\n";
-  }*/
   /*cout << "resied to 1 \n\n\n\n\n";
   for (size_t i = 0; i < VectorOfEmployees.size(); i++) {
     cout << VectorOfEmployees[i];
   }
   cout << "sizeof vector is : " << VectorOfEmployees.size() << endl;*/
-  //cout << e1 (0,0) << endl;
+  //

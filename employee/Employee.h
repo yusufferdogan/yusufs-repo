@@ -7,21 +7,25 @@ class Employee{
 public:
   Employee(int i,string n,int a,string d,double s):id(i),name(n),age(a),department(d),salary(s),ptr(NULL){};
   Employee(){};
-  bool     operator==  (Employee&);
-  Employee operator+   (Employee& e2);
-  friend ostream  &operator<< (ostream &outputStream, Employee& e1);
-  friend istream  &operator>> (istream &inputStream, Employee& e1);
-  void operator=  (Employee& e1);
-  void   operator++  (int);
-  void   operator++  ();
-  void   SetProjectNumber();
-  int    operator()(int x,int y)const;
+  /*---------------------------------------------------------------------------*/
+  friend ostream  &operator<< (ostream &outputStream, Employee&);
+  friend istream  &operator>> (istream &inputStream,  Employee&);
+  /*---------------------------------------------------------------------------*/
+  const bool operator==  (const Employee&)const;
+  const Employee operator+   (const Employee&)const ;
+  const Employee operator-   (const Employee&)const ;
+  const void operator=  (const Employee& e1) ;
+  const void   operator++  (int) ;
+  const void   operator++  () ;
+  const  int operator()(int x,int y)const;
+  /*---------------------------------------------------------------------------*/
   int    getid();
   int    getage();
   string getname();
   string getdepartment();
   double getsalary();
-  void setEmployesAges(vector <Employee> VectorOfEmployees);
+  void   setEmployesAges(vector <Employee> VectorOfEmployees);
+  void   SetProjectNumber();
 private:
   int id;
   string name;
@@ -31,4 +35,4 @@ private:
   int ProjectNumber[4][4];
   int *ptr;
 };
-#endif
+#endif //EMPLOYEE_H
